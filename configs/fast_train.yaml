@@ -4,17 +4,17 @@ output_dir: "output"
 train_data:
   video_path: "pose_example/video_clips"
   prompt: "None"
-  n_sample_frames: 4
+  n_sample_frames: 4 #12
   width: 512
   height: 512
   sample_start_idx: 0
-  sample_frame_rate: 2
+  sample_frame_rate: 2 #4
   dataset_set: "train"
 
 validation_data:
   prompts:
-    - "A Iron man on the beach"
-  video_length: 4
+    - "A Iron man is dribbling basketball on the beach"
+  video_length: 4 #24
   width: 512
   height: 512
   num_inference_steps: 50
@@ -26,15 +26,15 @@ validation_data:
 
 learning_rate: 3e-5
 train_batch_size: 1
-max_train_steps: 50
-checkpointing_steps: 25
-validation_steps: 100
+max_train_steps: 50 #5000
+checkpointing_steps: 25 #1000
+validation_steps: 50 #100
 trainable_modules:
   - "attn1.to_q"
   - "attn2.to_q"
   - "attn_temp"
   - "conv_temporal"
-skeleton_path: './pose_example/vis_ikun_pose2.mov'
+skeleton_path: './pose_example/basketball_pose.mov'
 
 
 seed: 33

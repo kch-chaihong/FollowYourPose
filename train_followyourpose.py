@@ -97,9 +97,10 @@ def main(
     if accelerator.is_main_process:
 
         os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(f"{output_dir}/model", exist_ok=True)
         os.makedirs(f"{output_dir}/samples", exist_ok=True)
         os.makedirs(f"{output_dir}/inv_latents", exist_ok=True)
-        OmegaConf.save(config, os.path.join(output_dir, 'config.yaml'))
+        OmegaConf.save(config, os.path.join(f"{output_dir}/model", 'config.yaml'))
 
     # Load scheduler, tokenizer and models.
     noise_scheduler = DDPMScheduler.from_pretrained(pretrained_model_path, subfolder="scheduler")
@@ -356,7 +357,7 @@ def main(
             vae=vae,
             unet=unet,
         )
-        pipeline.save_pretrained(output_dir)
+        pipeline.save_pretrained(f"{output_dir}/model")
 
     accelerator.end_training()
 
