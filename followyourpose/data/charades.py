@@ -21,7 +21,6 @@ class CharadesDataset(Dataset):
         print('dataset rank:', global_rank, ' / ',all_rank, ' ')
         
         # initialise object
-        # self.video_dir = 'pose_example/video_clips'
         self.video_dir = video_path
         self.meta_path = 'followyourpose/data/meta_data.json'
         spatial_transform = 'resize_center_crop'
