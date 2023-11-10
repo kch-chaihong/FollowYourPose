@@ -2,7 +2,7 @@ pretrained_model_path: "./checkpoints/stable-diffusion-v1-4"
 output_dir: "output"
 
 train_data:
-  video_path: "pose_example/CharadesVideos"
+  video_path: "pose_example/video_clips"
   prompt: "None"
   n_sample_frames: 4 #12
   width: 512
