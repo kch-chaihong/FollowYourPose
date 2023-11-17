@@ -162,15 +162,25 @@ def main(
         from datetime import datetime
    
         now = str(datetime.now())
+        filename = os.path.basename(skeleton_path)
+
+        # Split the filename into its name and extension
+        name, extension = os.path.splitext(filename)
+
+        name_parts = name.rsplit('/', 1)
+
+        # Get the desired part (assuming it's before the last '/')
+        desired_path = name_parts[-1]
+
         # print(now)
         for idx, prompt in enumerate(validation_data.prompts):
             sample = validation_pipeline(prompt, generator=generator, latents=ddim_inv_latent,
                                         skeleton_path=skeleton_path,
                                         **validation_data).videos
-            save_videos_grid(sample, f"{output_dir}/inference/sample-{global_step}-{str(seed)}-{now}/{prompt}.gif")
+            save_videos_grid(sample, f"{output_dir}/inference/{desired_path}.gif")
             samples.append(sample)
         samples = torch.concat(samples)
-        save_path = f"{output_dir}/inference/sample-{global_step}-{str(seed)}-{now}.gif"
+        save_path = f"{output_dir}/inference/{desired_path}.gif"
         save_videos_grid(samples, save_path)
         logger.info(f"Saved samples to {save_path}")
 
